@@ -11,19 +11,15 @@ import com.example.demo.features.admin.service.AdminServices;
 import com.example.demo.features.user.dto.UserLogin;
 import com.example.demo.features.user.service.UserServices;
 
-import java.util.List;
-
 @Controller
 public class AuthenticationController {
 
-    @Autowired
-    private UserServices userServices;
-    @Autowired
-    private AdminServices adminServices;
+    @Autowired private UserServices userServices;
+    @Autowired private AdminServices adminServices;
 
     @PostMapping("/adminLogin")
     public String adminLoginHandler(@ModelAttribute("adminLogin") AdminLogin login, Model model) {
-        if (adminServices.validateAdminCredentials(login.getEmail(), login.getPassword())) {
+        if (adminServices.validateLoginCredentials(login.getEmail(), login.getPassword())) {
             return "redirect:/admin/services";
         } else {
             model.addAttribute("error", "Invalid email or password");
@@ -37,11 +33,6 @@ public class AuthenticationController {
         String password = login.getUserPassword();
 
         if (userServices.validateLoginCredentials(email, password)) {
-            /*
-               on the original code, it would retrieve the user with its corresponding orders
-               and call addAttribute on them.
-               now we redirect to user/dashboard and put the logic on there
-            */
             return "redirect:/user/dashboard";
         } else {
             model.addAttribute("error2", "Invalid email or password");
