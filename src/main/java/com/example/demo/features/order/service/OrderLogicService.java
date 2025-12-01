@@ -13,7 +13,7 @@ import com.example.demo.features.user.model.User;
 public class OrderLogicService {
 
     @Autowired
-    private OrderServices orderServices; // Assuming OrderServices handles saving/retrieving
+    private OrderServices orderServices;
 
     public double processNewOrder(Orders order, User user) {
         double totalAmount = Logic.countTotal(order.getoPrice(), order.getoQuantity());
