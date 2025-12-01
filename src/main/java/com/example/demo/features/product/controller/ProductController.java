@@ -16,6 +16,12 @@ public class ProductController
 	@Autowired
 	private ProductServices productServices;
 
+	@GetMapping("/addProduct")
+	public String addProduct()
+	{
+		return "Add_Product";
+	}
+
 	//	AddProduct
 	@PostMapping("/addingProduct")
 	public String addProduct(@ModelAttribute Product product)
